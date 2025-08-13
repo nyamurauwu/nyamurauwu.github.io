@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>>.< Leslie</title>
+    <title>">Hey, I'm Leslie</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -321,6 +321,7 @@
             background-color: #1a1a2e;
         }
 
+        /* PWA styles */
         @media (display-mode: standalone) {
             body {
                 padding-top: env(safe-area-inset-top);
@@ -375,6 +376,7 @@
     </div>
 
     <script>
+       
         function loadBackgroundImage() {
             const background = document.getElementById('background');
             const img = new Image();
@@ -384,15 +386,17 @@
                 background.classList.remove('loading');
             };
             
-            img.onerror = function() 
+            img.onerror = function() {
+                // Fallback gradient if image fails
                 background.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)';
                 background.classList.remove('loading');
             };
-    
+            
+     
             img.src = 'https://files.catbox.moe/vsskx3.png';
         }
 
-     
+       
         let lastTouchEnd = 0;
         document.addEventListener('touchend', function (event) {
             const now = (new Date()).getTime();
@@ -406,7 +410,6 @@
             e.preventDefault();
         });
 
-        // Enhanced touch feedback
         document.querySelectorAll('.social-icon').forEach(icon => {
             icon.addEventListener('touchstart', function() {
                 this.style.transform = 'translateY(0) scale(0.95)';
@@ -419,13 +422,14 @@
             }, { passive: true });
         });
 
-
+    
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', loadBackgroundImage);
         } else {
             loadBackgroundImage();
         }
 
+     
         function setViewportHeight() {
             const vh = window.innerHeight * 0.01;
             document.documentElement.style.setProperty('--vh', `${vh}px`);
